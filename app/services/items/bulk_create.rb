@@ -1,5 +1,5 @@
 module Items
-  class BulkCreate < BaseService
+  class BulkCreate
     def initialize(new_items, category)
       @new_items = new_items
       @category = category

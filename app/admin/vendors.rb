@@ -1,4 +1,5 @@
 ActiveAdmin.register Vendor do
+  permit_params :name, :price_xpath, :shipment_cost
   config.sort_order = 'created_at ASC'
 
   filter :name
@@ -10,13 +11,16 @@ ActiveAdmin.register Vendor do
       row :name
       row :shipping_cost
       row :url
-      table_for vendor.item_prices do
-        column :name do |item_price|
-          link_to item_price.item.name, edit_admin_item_price_path(item_price.id)
-        end
-        column :price
-        column :url
-      end
+      row :price_xpath
     end
+  end
+
+  form do |f|
+    inputs do
+      f.input :name
+      f.input :shipment_cost
+      f.input :price_xpath
+    end
+    f.submit
   end
 end
