@@ -1,17 +1,33 @@
 ActiveAdmin.register ItemPrice do
-  permit_params :url, :price
+  permit_params :url, :price, :faulty_xpath, :page_not_found
 
   filter :vendor
-  filter :item
-  filter :price
+  filter :"item_name", as: :string
+  # filter :price
+  # filter :url
+  filter :price_present, as: :boolean
+  filter :url_present, as: :boolean
+  filter :faulty_xpath
+  filter :page_not_found
 
-  index do
-    column :name do |item_price|
-      item_price.item.name
+  index row_class: ->elem { 'warning' if elem.faulty_xpath || elem.page_not_found || elem.price == 0.0 } do
+    selectable_column
+    id_column
+    column :item, sortable: 'items.name' do |item_price|
+      link_to item_price.item.name, admin_item_path(item_price.item)
     end
-    column :url
+    column :vendor do |item_price|
+      item_price.vendor.name
+    end
+    column :url do |item_price|
+      if item_price.url
+        link_to item_price.url, item_price.vendor.url + item_price.url
+      else
+        item_price.url
+      end
+    end
     column :price do |item_price|
-      number_to_currency(item_price.price, unit: "PLN", separator: ",", delimiter: "", format: "%n %u")
+      item_price.present? ? number_to_currency(item_price.price, unit: "PLN", separator: ",", delimiter: " ", format: "%n %u") : nil
     end
     actions
   end
@@ -22,5 +38,18 @@ ActiveAdmin.register ItemPrice do
       f.input :price
     end
     f.submit
+  end
+
+  batch_action :fetch_prices do |ids|
+    batch_action_collection.find(ids).each do |item_price|
+      PriceUpdater.call(item_price)
+    end
+    redirect_to request.referer, alert: "Item prices updated!"
+  end
+
+  controller do
+    def scoped_collection
+      end_of_association_chain.includes(:item)
+    end
   end
 end

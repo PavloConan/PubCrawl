@@ -38,7 +38,7 @@ module Items
 
         Vendor.where.not(id: @base_vendor.id).each do |vendor|
           next if item.item_prices.find_by(id: vendor.id).present?
-          item.item_prices.create!(
+          item.item_prices.create(
             vendor: vendor
           )
           puts "Created item price for vendor: #{vendor.name}"

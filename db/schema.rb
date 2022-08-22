@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2022_08_18_182701) do
+ActiveRecord::Schema[7.0].define(version: 2022_08_20_185833) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
@@ -33,6 +33,8 @@ ActiveRecord::Schema[7.0].define(version: 2022_08_18_182701) do
     t.string "url"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.boolean "faulty_xpath", default: false
+    t.boolean "page_not_found", default: false
     t.index ["item_id"], name: "index_item_prices_on_item_id"
     t.index ["price"], name: "index_item_prices_on_price"
     t.index ["vendor_id"], name: "index_item_prices_on_vendor_id"
@@ -47,6 +49,18 @@ ActiveRecord::Schema[7.0].define(version: 2022_08_18_182701) do
     t.index ["name"], name: "index_items_on_name", unique: true
   end
 
+  create_table "potential_items", force: :cascade do |t|
+    t.bigint "vendor_id", null: false
+    t.string "name"
+    t.string "url"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.boolean "marked_for_promotion", default: false
+    t.integer "category"
+    t.index ["name"], name: "index_potential_items_on_name"
+    t.index ["vendor_id"], name: "index_potential_items_on_vendor_id"
+  end
+
   create_table "vendors", force: :cascade do |t|
     t.string "name"
     t.string "sys_name"
@@ -59,4 +73,5 @@ ActiveRecord::Schema[7.0].define(version: 2022_08_18_182701) do
 
   add_foreign_key "item_prices", "items"
   add_foreign_key "item_prices", "vendors"
+  add_foreign_key "potential_items", "vendors"
 end

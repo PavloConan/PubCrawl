@@ -5,6 +5,14 @@ ActiveAdmin.register Vendor do
   filter :name
   filter :shipment_cost
 
+  index do
+    id_column
+    column :name
+    column :url
+    column :shipping_cost
+    actions
+  end
+
   show do |vendor|
     attributes_table do
       row :id
