@@ -45,4 +45,12 @@ ActiveAdmin.register PotentialItem do
     end
     redirect_to request.referer, alert: "Items promoted!"
   end
+
+  controller do
+    def destroy
+      super do |success,failure|
+        success.html { redirect_to request.referer }
+      end
+    end
+  end
 end

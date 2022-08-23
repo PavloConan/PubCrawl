@@ -1,10 +1,12 @@
 ActiveAdmin.register ItemPrice do
-  permit_params :url, :price, :faulty_xpath, :page_not_found
+  permit_params :url, :price, :faulty_xpath, :page_not_found, :manual_update
 
   filter :vendor
   filter :"item_name", as: :string
+  filter :"item_category", as: :select, collection: Item.categories
   # filter :price
   # filter :url
+  filter :manual_update
   filter :price_present, as: :boolean
   filter :url_present, as: :boolean
   filter :faulty_xpath
@@ -29,6 +31,7 @@ ActiveAdmin.register ItemPrice do
     column :price do |item_price|
       item_price.present? ? number_to_currency(item_price.price, unit: "PLN", separator: ",", delimiter: " ", format: "%n %u") : nil
     end
+    column :manual_update
     actions
   end
 
@@ -47,7 +50,19 @@ ActiveAdmin.register ItemPrice do
     redirect_to request.referer, alert: "Item prices updated!"
   end
 
+  batch_action :set_to_manual_update do |ids|
+    batch_action_collection.find(ids).each do |item_price|
+      item_price.update!(manual_update: true)
+    end
+    redirect_to request.referer, alert: "Item prices set to manual update!"
+  end
+
   controller do
+    def update
+      super
+      PriceUpdater.call(@item_price) if @item_price.price.blank?
+    end
+
     def scoped_collection
       end_of_association_chain.includes(:item)
     end

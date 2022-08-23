@@ -16,7 +16,7 @@ module PotentialItems
           category: @potential_item.category
         )
 
-        @potential_item.vendor.item_prices.create!(
+        base_item_price = @potential_item.vendor.item_prices.create!(
           item: item,
           url: @potential_item.url
         )
@@ -26,6 +26,8 @@ module PotentialItems
             item: item
           )
         end
+
+        PriceUpdater.call(base_item_price)
 
         @potential_item.destroy!
       end

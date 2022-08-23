@@ -24,14 +24,14 @@ module Items
         if base_vendor_price.blank?
           item.item_prices.create!(
             vendor: @base_vendor,
-            price: new_item[:price],
+            price: parse_price(new_item[:price]),
             url: new_item[:url]
           )
 
           puts "Item price for base vendor created!"
         else
           base_vendor_price.update!(
-            price: new_item[:price]
+            price: parse_price(new_item[:price])
           )
           puts "Item price for base vendor updated!"
         end
@@ -44,6 +44,11 @@ module Items
           puts "Created item price for vendor: #{vendor.name}"
         end
       end
+    end
+
+    def parse_price(price)
+      return if price.blank?
+      price.strip.match(/((\d+\s)?\d+\,\d+)/).to_s.gsub(' ','').gsub(',','.').to_f
     end
   end
 end

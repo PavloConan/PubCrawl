@@ -22,7 +22,7 @@ module Forfiter
             url: response.xpath(
               "//*[@id='amasty-shopby-product-list']/div[2]/ol/li[#{i+1}]/div/div[2]/strong/a"
               )&.attribute("href")&.value&.split('.pl')&.last,
-            category: "Tequila"
+            category: "Liqueur"
           }
         )
       end
@@ -44,7 +44,8 @@ module Forfiter
 
     def self.urls
       [
-        "https://www.forfiterexclusive.pl/tequila/?product_list_limit=36"
+        "https://www.forfiterexclusive.pl/likier/?product_list_limit=36"
+        # "https://www.forfiterexclusive.pl/tequila/?product_list_limit=36"
         # "https://www.forfiterexclusive.pl/vermouth/?product_list_limit=36"
         # "https://www.forfiterexclusive.pl/koniak/?product_list_limit=36",
         # "https://www.forfiterexclusive.pl/gin/?product_list_limit=36"

@@ -5,7 +5,7 @@ class PriceUpdater < Kimurai::Base
   }
 
   def self.call(item_price)
-    return if item_price.url.blank?
+    return if item_price.url.blank? || item_price.manual_update
 
     @@item_price = item_price
     @start_urls = [@@item_price.absolute_url]
@@ -26,6 +26,6 @@ class PriceUpdater < Kimurai::Base
   end
 
   def parse_price(price)
-    price.strip.match(/((\d+\s)?\d+\,\d+)/).to_s.gsub(' ','').to_f
+    price.strip.match(/((\d+\s)?\d+\,\d+)/).to_s.gsub(' ','').gsub(',','.').to_f
   end
 end

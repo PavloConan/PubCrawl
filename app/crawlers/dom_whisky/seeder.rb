@@ -19,13 +19,14 @@ module DomWhisky
           @@products.push(
             {
               name: response.xpath("//*[@id='search']/div/div[#{i}]/div[#{j}]/div/a[3]")&.text&.strip,
-              url: response.xpath("//*[@id='search']/div/div[#{i}]/div[#{j}]/div/a[3]")&.attribute("href")&.value
+              url: response.xpath("//*[@id='search']/div/div[#{i}]/div[#{j}]/div/a[3]")&.attribute("href")&.value,
+              price: response.xpath("//*[@id='search']/div/div[#{i}]/div[#{j}]/div/div[3]/span")&.text&.strip
             }
           )
         end
       end
 
-      Items::BulkCreate.new(@@products, "Tequila").call
+      Items::BulkCreate.new(@@products, "Whisky").call
 
       @@products = []
 
@@ -38,7 +39,14 @@ module DomWhisky
 
     def self.urls
       [
-        "https://sklep-domwhisky.pl/pol_m_Inne-alkohole_Mezcal-Sotol-Tequila_Tequila-516.html"
+        "https://sklep-domwhisky.pl/pol_m_World-Whisky_Whiskey-amerykanska_Single-malt-whisky-515.html",
+        "https://sklep-domwhisky.pl/pol_m_World-Whisky_Whiskey-amerykanska_Tennessee-whiskey-166.html",
+        "https://sklep-domwhisky.pl/pol_m_World-Whisky_Whiskey-irlandzka_Blended-whiskey-203.html",
+        "https://sklep-domwhisky.pl/pol_m_World-Whisky_Whiskey-irlandzka_Grain-whiskey-196.html",
+        "https://sklep-domwhisky.pl/pol_m_World-Whisky_Whiskey-irlandzka_Single-malt-whiskey-201.html",
+        "https://sklep-domwhisky.pl/pol_m_World-Whisky_Whisky-japonska_Blended-malt-whisky-184.html",
+        "https://sklep-domwhisky.pl/pol_m_World-Whisky_Whisky-japonska_Blended-whisky-182.html",
+        "https://sklep-domwhisky.pl/pol_m_World-Whisky_Whisky-japonska_Single-malt-whisky-180.html"
       ]
     end
   end

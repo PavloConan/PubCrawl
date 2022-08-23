@@ -9,6 +9,9 @@ class Item < ApplicationRecord
     "Brandy" => 3,
     "Cognac" => 4,
     "Vermouth" => 5,
-    "Tequila" => 6
+    "Tequila" => 6,
+    "Mezcal" => 7,
+    "Liqueur" => 8,
+    "Whisky" => 9
   }
 end
