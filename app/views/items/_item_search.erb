@@ -1,0 +1,5 @@
+<div class="items-search">
+  <%= search_form_for @q do |f| %>
+    <%= f.search_field :name_cont, class: "items-search__input", placeholder: "Wyszukaj spośród #{Item.all.size} produktów..." %>
+  <% end %>
+</div>

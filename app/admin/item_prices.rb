@@ -4,8 +4,6 @@ ActiveAdmin.register ItemPrice do
   filter :vendor
   filter :"item_name", as: :string
   filter :"item_category", as: :select, collection: Item.categories
-  # filter :price
-  # filter :url
   filter :manual_update
   filter :price_present, as: :boolean
   filter :url_present, as: :boolean
@@ -39,6 +37,8 @@ ActiveAdmin.register ItemPrice do
     inputs do
       f.input :url
       f.input :price
+      f.input :faulty_xpath
+      f.input :manual_update
     end
     f.submit
   end

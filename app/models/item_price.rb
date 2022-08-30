@@ -4,6 +4,8 @@ class ItemPrice < ApplicationRecord
 
   validates_uniqueness_of :item_id, scope: :vendor_id
 
+  scope :found, -> { where.not(price: nil) }
+
   def absolute_url
     return unless url
 

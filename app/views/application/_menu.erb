@@ -1,0 +1,10 @@
+<div class="menu-wrapper">
+  <div class="menu--header">
+    Kategorie
+  </div>
+  <div class="menu--content">
+    <% Item.categories.keys.each do |category| %>
+      <div class="menu--item"><%= category %></div>
+    <% end %>
+  </div>
+</div>

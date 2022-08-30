@@ -1,0 +1,5 @@
+<div class="cart-wrapper" data-controller="cart">
+  <div class="cart--header">Koszyk</div>
+  <%= turbo_stream_from 'cart_stream' %>
+  <%= render "carts/cart" %>
+</div>

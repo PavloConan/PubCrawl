@@ -1,0 +1,41 @@
+<%= render "items/item_search" %>
+
+<div class="comparisons-wrapper" data-controller="cart">
+  <% @vendors.each do |vendor| %>
+    <div class="comparison">
+      <div class="comparison--left">
+        <div class="vendor--image">
+          <% if vendor[:image_url] %>
+            <%= image_tag(vendor[:image_url]) %>
+          <% end %>
+        </div>
+      </div>
+      <div class="comparison--middle">
+        <ul class="comparison--items">
+          <% vendor[:found].each do |found_item| %>
+            <li class="comparison-item__found" %>
+              <div class="comparison-item--name">
+                <%= found_item[:item] %><span class="bold"> x<%= found_item[:amount]%></span>
+              </div>
+              <div class="comparison-item--price" %>
+                - <%= number_to_currency(found_item[:price], unit: "PLN", separator: ",", delimiter: " ", format: "%n %u")%>
+              </div>
+            </li>
+          <% end %>
+          <% vendor[:not_found].each do |missing_item| %>
+            <li class="comparison-item__not-found" %>
+              <div class="comparison-item--name">
+                <%= missing_item %>
+              </div>
+            </li>
+          <% end %>
+        </ul>
+      </div>
+      <div class="comparison--right">
+        <div class="comparison--final-price" %>
+          <%= number_to_currency(vendor[:final_amount], unit: "PLN", separator: ",", delimiter: " ", format: "%n %u")%>
+        </div>
+      </div>
+    </div>
+  <% end %>
+</div>

@@ -1,0 +1,25 @@
+<%= render "item_search" %>
+<div class="vendors-wrapper">
+  <% @item.item_prices.found.each do |item_price| %>
+    <div class="vendor">
+      <div class="vendor--left">
+        <div class="vendor--image">
+          <% if item_price.vendor.image_data %>
+            <%= link_to image_tag(item_price.vendor.image_url), item_price.vendor.url, target: "_blank" %>
+          <% end %>
+        </div>
+      </div>
+      <div class="vendor--right">
+        <div class="vendor--price">
+          <%= number_to_currency(item_price.price, unit: "PLN", separator: ",", delimiter: " ", format: "%n %u") %>
+        </div>
+        <div class="vendor--link">
+          <%= link_to "Przejdź do sklepu", item_price.absolute_url, class: "btn btn-primary main-button", target: "_blank" %>
+        </div>
+        <div class="vendor--updated-at">
+          <%= "Ostatnia aktualizacja: #{item_price.updated_at.strftime('%d/%m/%Y %H:%M')}" %>
+        </div>
+      </div>
+    </div>
+  <% end %>
+</div>

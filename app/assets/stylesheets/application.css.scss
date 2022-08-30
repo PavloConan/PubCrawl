@@ -1,0 +1,272 @@
+/*
+ * This is a manifest file that'll be compiled into application.css, which will include all the files
+ * listed below.
+ *
+ * Any CSS (and SCSS, if configured) file within this directory, lib/assets/stylesheets, or any plugin's
+ * vendor/assets/stylesheets directory can be referenced here using a relative path.
+ *
+ * You're free to add application-wide styles to this file and they'll appear at the bottom of the
+ * compiled file so the styles you add here take precedence over styles defined in any other CSS
+ * files in this directory. Styles in this file should be added after the last require_* statement.
+ * It is generally better to create a new file per style scope.
+ *
+ *= require_tree .
+ *= require_self
+ */
+ @import "bootstrap";
+
+ body {
+   display: flex;
+   justify-content: center;
+   padding-bottom: 50px;
+ }
+
+ .pagination {
+   margin: 20px;
+ }
+
+ .main-wrapper {
+   display: flex;
+   flex-direction: column;
+   align-items: center;
+ }
+
+ .item {
+  border: 1px solid;
+  border-radius: 10px;
+  min-width: 1020px;
+  min-height: 222px;
+  margin: 10px;
+  display: flex;
+  justify-content: space-between;
+
+  &--availability {
+    margin-top: 20px;
+    font-size: 12px;
+    font-weight: bold;
+  }
+
+  &--right, &--left {
+    display: flex;
+    flex-direction: column;
+  }
+
+  &--left {
+    padding: 30px;
+
+    &__with-img {
+      display: flex;
+    }
+  }
+
+  &--right {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+  }
+
+  &--price-wrapper {
+    padding: 30px;
+    text-align: center;
+
+    &__with-img {
+      display: flex;
+      justify-content: center;
+      flex-direction: column;
+      padding: 50px;
+    }
+  }
+
+  &--lowest {
+    font-size: 14px;
+  }
+
+  &--cart-icon {
+    height: 35px;
+    width: 35px;
+    background: lightgreen;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border-radius: 0px 8px 0px 0px;
+    cursor: pointer;
+
+    img {
+      height: 20px;
+      width: 20px;
+    }
+  }
+
+  &--right-wrapper {
+    top: 10;
+  }
+
+  &--image-wrapper {
+    padding: 10px;
+    display: flex;
+    justify-content: center;
+    flex-flow: column;
+    img {
+      max-height: 200px;
+      max-width: 120px;
+      min-height: 150px;
+      margin: 0px 20px 0px 10px;
+    }
+  }
+
+  &--image-side {
+    display: flex;
+    justify-content: center;
+    flex-direction: column;
+  }
+}
+
+.items-search {
+  &__input {
+    min-width: 1020px;
+    padding: 10px;
+    margin: 30px;
+    border-radius: 10px;
+  }
+}
+
+.main-button {
+  text-decoration: none !important;
+  color: white !important;
+}
+
+.vendor {
+  padding: 30px;
+  border: 1px solid;
+  border-radius: 10px;
+  min-width: 1020px;
+  margin: 10px;
+  display: flex;
+  justify-content: space-between;
+
+  &--right, &--left {
+    display: flex;
+    flex-direction: column;
+  }
+
+  &--right {
+    align-items: center;
+    justify-content: center;
+  }
+
+  &--image {
+    background: black;
+    border-radius: 10px;
+    min-height: 200px;
+    display: flex;
+    align-items: center;
+    padding: 10px;
+    justify-content: center;
+    min-width: x;
+    width: 300px;
+
+    img {
+      max-width: 300px;
+    }
+  }
+
+  &--price {
+    font-size: 24px;
+    font-weight: bold;
+  }
+
+  &--updated-at {
+    font-size: 12px;
+    margin-top: 20px;
+  }
+}
+
+.menu-wrapper {
+  padding: 30px;
+}
+
+.menu {
+  &--header {
+    font-size: 20px;
+    font-weight: bold;
+  }
+
+  &--content {
+    display: flex;
+    flex-direction: column;
+  }
+
+  &--item {
+    display: unset;
+  }
+}
+
+.cart-wrapper {
+  padding: 20px;
+  min-width: 370px;
+}
+
+.cart {
+  &--items {
+    border: 1px solid;
+    border-radius: 10px;
+    padding: 20px;
+    font-size: 10px;
+  }
+
+  &--compare {
+    text-align: center;
+    margin-top: 5px;
+  }
+
+  &--actions {
+    text-align: center;
+  }
+
+  &--clear {
+    cursor: pointer;
+  }
+}
+
+.hidden {
+  visibility: hidden;
+}
+
+.bold {
+  font-weight: bold;
+}
+
+.comparison {
+  display: flex;
+  border: 1px solid;
+  border-radius: 10px;
+  margin: 30px;
+  padding: 20px;
+  justify-content: space-around;
+  min-width: 1020px;
+
+  &--middle {
+    display: flex;
+    align-items: center;
+    font-size: 12px;
+  }
+
+  .comparison-item {
+    &__found {
+      color: green;
+    }
+
+    &__not-found {
+      color: red;
+    }
+  }
+
+  &--right {
+    display: flex;
+    align-items: center;
+    font-size: 24px;
+    font-weight: bold;
+    min-width: 180px;
+    justify-content: end;
+  }
+}

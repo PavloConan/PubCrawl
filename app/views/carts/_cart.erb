@@ -1,0 +1,21 @@
+<div id="cart_items" data-controller="cart" %>
+  <ul class="cart--items">
+    <% if JSON.parse(cookies[:cart]).blank? %>
+      Twój koszyk jest pusty
+    <% else %>
+      <% JSON.parse(cookies[:cart]).each do |cart_item| %>
+        <%= render "carts/cart_item", cart_item: cart_item %>
+      <% end %>
+  <% end %>
+  </ul>
+  <% unless JSON.parse(cookies[:cart]).blank? %>
+    <div  class="cart--actions">
+      <div class="cart--compare">
+        <%= link_to "Porównaj ceny", cart_path, class: "btn btn-primary main-button" %>
+      </div>
+      <div class="cart--clear" data-action="click->cart#clearCart">
+        Wyczyść koszyk
+      </div>
+    </div>
+  <% end %>
+</div>

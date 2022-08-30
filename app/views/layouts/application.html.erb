@@ -11,6 +11,10 @@
   </head>
 
   <body>
-    <%= yield %>
+    <%= render "menu" %>
+    <div class="main-wrapper">
+      <%= yield %>
+    </div>
+    <%= render "carts/index" %>
   </body>
 </html>

@@ -26,7 +26,7 @@ module DomWhisky
         end
       end
 
-      Items::BulkCreate.new(@@products, "Whisky").call
+      Items::BulkCreate.new(@@products, "Wine").call
 
       @@products = []
 
@@ -39,14 +39,7 @@ module DomWhisky
 
     def self.urls
       [
-        "https://sklep-domwhisky.pl/pol_m_World-Whisky_Whiskey-amerykanska_Single-malt-whisky-515.html",
-        "https://sklep-domwhisky.pl/pol_m_World-Whisky_Whiskey-amerykanska_Tennessee-whiskey-166.html",
-        "https://sklep-domwhisky.pl/pol_m_World-Whisky_Whiskey-irlandzka_Blended-whiskey-203.html",
-        "https://sklep-domwhisky.pl/pol_m_World-Whisky_Whiskey-irlandzka_Grain-whiskey-196.html",
-        "https://sklep-domwhisky.pl/pol_m_World-Whisky_Whiskey-irlandzka_Single-malt-whiskey-201.html",
-        "https://sklep-domwhisky.pl/pol_m_World-Whisky_Whisky-japonska_Blended-malt-whisky-184.html",
-        "https://sklep-domwhisky.pl/pol_m_World-Whisky_Whisky-japonska_Blended-whisky-182.html",
-        "https://sklep-domwhisky.pl/pol_m_World-Whisky_Whisky-japonska_Single-malt-whisky-180.html"
+        "https://sklep-domwhisky.pl/pol_m_Wina-i-Szampany-674.html"
       ]
     end
   end

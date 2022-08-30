@@ -1,0 +1,47 @@
+<%= render "item_search" %>
+
+<div class="items-wrapper" data-controller="cart">
+  <% @items.each do |item| %>
+    <div class="item">
+      <% if item.image_url %>
+        <div class="item--left__with-img">
+          <div class="item--image-wrapper">
+            <%= image_tag(item.image_url, class: "item--image") %>
+          </div>
+          <div class="item--image-side" %>
+            <div class="item--name"><%= item.name %></div>
+            <div class="item--availability"><%= item.availability %></div>
+          </div>
+        </div>
+        <div class="item--right">
+          <div class="item--price-wrapper__with-img">
+            <div class="item--prices">
+              <%= link_to "Sprawdź ceny", item_path(item), class: "btn btn-primary main-button" %>
+            </div>
+            <div class="item--lowest" %>
+              <%= "Najtaniej: #{number_to_currency(item.lowest_price, unit: "PLN", separator: ",", delimiter: " ", format: "%n %u")}" %>
+            </div>
+          </div>
+          <div data-action="click->cart#addItem"><%= image_tag("cart.png", class: "item--cart-icon", value: item.id)%></div>
+        </div>
+      <% else %>
+        <div class="item--left">
+          <div class="item--name"><%= item.name %></div>
+          <div class="item--availability"><%= item.availability %></div>
+        </div>
+        <div class="item--right">
+          <div class="item--price-wrapper">
+            <div class="item--prices">
+              <%= link_to "Sprawdź ceny", item_path(item), class: "btn btn-primary main-button" %>
+            </div>
+            <div class="item--lowest" %>
+              <%= "Najtaniej: #{number_to_currency(item.lowest_price, unit: "PLN", separator: ",", delimiter: " ", format: "%n %u")}" %>
+            </div>
+          </div>
+          <div data-action="click->cart#addItem"><%= image_tag("cart.png", class: "item--cart-icon", value: item.id)%></div>
+        </div>
+      <% end %>
+    </div>
+  <% end %>
+</div>
+<%== pagy_nav(@pagy) %>

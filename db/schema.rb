@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2022_08_22_162050) do
+ActiveRecord::Schema[7.0].define(version: 2022_08_30_122812) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
@@ -24,6 +24,15 @@ ActiveRecord::Schema[7.0].define(version: 2022_08_22_162050) do
     t.datetime "updated_at", null: false
     t.index ["email"], name: "index_admin_users_on_email", unique: true
     t.index ["reset_password_token"], name: "index_admin_users_on_reset_password_token", unique: true
+  end
+
+  create_table "alerts", force: :cascade do |t|
+    t.string "description"
+    t.string "item_price_url"
+    t.integer "item_price_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.integer "item_id"
   end
 
   create_table "item_prices", force: :cascade do |t|
@@ -46,6 +55,7 @@ ActiveRecord::Schema[7.0].define(version: 2022_08_22_162050) do
     t.integer "category"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.string "image_url"
     t.index ["category"], name: "index_items_on_category"
     t.index ["name"], name: "index_items_on_name", unique: true
   end
@@ -70,6 +80,7 @@ ActiveRecord::Schema[7.0].define(version: 2022_08_22_162050) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.string "price_xpath"
+    t.jsonb "image_data"
   end
 
   add_foreign_key "item_prices", "items"
